@@ -249,7 +249,9 @@ will give the result
 
 ![](../../.gitbook/assets/image%20%282%29.png)
 
-`sid` field will different since it is defined as serial
+`sid` field will differ since it is defined as serial
+
+Note that the last zip code is invalid, which indicates backend validation is also important.
 
 ## Result 02
 
