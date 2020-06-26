@@ -231,9 +231,9 @@ Change `school-forms.css` to be
 
 The register form will be rendered in the block that is placed in the secondary sidebar, only in `/schools`
 
-![](../../.gitbook/assets/image%20%2818%29.png)
+![](../../.gitbook/assets/image%20%2819%29.png)
 
 In the page `/schools/create` The form will look different, since we are passing an extra `type` argument to the form hook and add different classes for styling.
 
-![](../../.gitbook/assets/image%20%2819%29.png)
+![](../../.gitbook/assets/image%20%2820%29.png)
 

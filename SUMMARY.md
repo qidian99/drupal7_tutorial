@@ -15,4 +15,5 @@
   * [Customize form CSS](tutorial/use-drupal-to-build-a-crud-api/customize-form-css.md)
   * [Create a block for school register form](tutorial/use-drupal-to-build-a-crud-api/create-a-block-for-school-forms.md)
   * [Style the school lists](tutorial/use-drupal-to-build-a-crud-api/style-the-school-lists.md)
+  * [Code Summary](tutorial/use-drupal-to-build-a-crud-api/code-summary.md)
 
