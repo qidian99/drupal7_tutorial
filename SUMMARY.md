@@ -13,5 +13,5 @@
   * [Create form for insertion, update, and deletion](tutorial/use-drupal-to-build-a-crud-api/create-form-1.md)
   * [Show form in modal popup](tutorial/use-drupal-to-build-a-crud-api/show-form-in-modal-popup.md)
   * [Customize form CSS](tutorial/use-drupal-to-build-a-crud-api/customize-form-css.md)
-  * [Create a block for school forms](tutorial/use-drupal-to-build-a-crud-api/create-a-block-for-school-forms.md)
+  * [Create a block for school register form](tutorial/use-drupal-to-build-a-crud-api/create-a-block-for-school-forms.md)
 
