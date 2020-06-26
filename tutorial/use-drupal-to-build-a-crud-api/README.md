@@ -83,5 +83,11 @@ drush en views devel pathauto -y
 
 ## Code Summary
 
+{% page-ref page="code-summary.md" %}
+
+## Demo
+
+{% embed url="https://www.loom.com/share/229d5aca1d32444eb183ebb3eb5eb553" %}
+
 
 
