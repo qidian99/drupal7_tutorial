@@ -1,4 +1,4 @@
-# Use Drupal to build custom module that affords CRUD operations
+# Use Drupal to build a custom module that affords CRUD operations
 
 ## UI Prototype
 
@@ -76,6 +76,10 @@ drush en views devel pathauto -y
 ### Create a block for school form
 
 {% page-ref page="create-a-block-for-school-forms.md" %}
+
+### Style the school list
+
+{% page-ref page="style-the-school-lists.md" %}
 
 
 
