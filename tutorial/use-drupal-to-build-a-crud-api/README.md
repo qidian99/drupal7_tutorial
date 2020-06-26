@@ -24,22 +24,22 @@
 
 Any delete button
 
-## Drupal Modules
+## Drupal Installation
 
-NOTE: Actually not all modules listed below are used.
-
-* Install Drupal 7 from **Acquia Desktop** \(drupal\_7\_72\)
+Install Drupal 7 from **Acquia Desktop** \(drupal\_7\_72\)
 
 {% embed url="https://dev.acquia.com/downloads" %}
 
+**APIs:**
+
 * Form-API
 * Entity-API
-* Views
-  * For filtering the nodes based on content-type
-* Devel
-  * For development utilities
-* Pathauto
-  * For renaming the path following REST-ful guidelines
+
+**NOTE**: some modules listed below are not used, but are worth learning
+
+* **Views:** for filtering the nodes based on content-type
+* **Devel**: for development utilities
+* **Pathauto:** for renaming the path following REST-ful guidelines
 
 If using `drush`,  do the following commands
 
