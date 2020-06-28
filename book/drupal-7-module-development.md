@@ -32,3 +32,9 @@ description: 'http://github.com/LearningDrupal7Development'
 
 {% file src="../.gitbook/assets/drupal-7-module-development-chapter-7.pdf" caption="Mindmap" %}
 
+## Chapter 08: Drupal Permissions and Security
+
+{% file src="../.gitbook/assets/drupal-7-module-development-chapter-8.pdf" caption="Mindmap" %}
+
+
+
