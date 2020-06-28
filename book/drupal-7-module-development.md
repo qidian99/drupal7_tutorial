@@ -24,5 +24,9 @@ description: 'http://github.com/LearningDrupal7Development'
 
 {% file src="../.gitbook/assets/drupal-7-module-development-chapter-5.pdf" caption="Mindmap" %}
 
+## Chapter 06: Working with Content
+
+{% file src="../.gitbook/assets/drupal-7-module-development-chapter-6.pdf" caption="Mindmap" %}
+
 
 
