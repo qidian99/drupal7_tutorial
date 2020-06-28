@@ -28,5 +28,7 @@ description: 'http://github.com/LearningDrupal7Development'
 
 {% file src="../.gitbook/assets/drupal-7-module-development-chapter-6.pdf" caption="Mindmap" %}
 
+## Chapter 07: Creating New Fields
 
+{% file src="../.gitbook/assets/drupal-7-module-development-chapter-7.pdf" caption="Mindmap" %}
 
