@@ -4,6 +4,12 @@ description: 'http://github.com/LearningDrupal7Development'
 
 # Drupal 7 Module Development
 
+## Github repository
+
+For custom modules and the full MarginNote mind map.
+
+{% embed url="https://github.com/qidian99/Drupal-7-Module-Development" caption="" %}
+
 ## Chapter 01: Developing for Drupal 7
 
 {% file src="../.gitbook/assets/drupal-7-module-development-chapter-1.pdf" caption="Mindmap" %}
