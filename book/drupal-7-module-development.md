@@ -36,5 +36,9 @@ description: 'http://github.com/LearningDrupal7Development'
 
 {% file src="../.gitbook/assets/drupal-7-module-development-chapter-8.pdf" caption="Mindmap" %}
 
+## Chapter 09: Node Access
+
+{% file src="../.gitbook/assets/drupal-7-module-development-chapter-9.pdf" caption="Mindmap" %}
+
 
 
