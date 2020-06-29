@@ -52,5 +52,11 @@ description: 'http://github.com/LearningDrupal7Development'
 
 {% file src="../.gitbook/assets/drupal-7-module-development-chapter-12.pdf" caption="Mindmap" %}
 
+## Appendix A: Database
 
+{% file src="../.gitbook/assets/drupal-7-module-development-database.pdf" caption=" Mindmap" %}
+
+## Appendix B: Security
+
+{% file src="../.gitbook/assets/drupal-7-module-development-security.pdf" caption="Mindmap" %}
 
