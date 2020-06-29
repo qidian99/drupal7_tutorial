@@ -48,5 +48,9 @@ description: 'http://github.com/LearningDrupal7Development'
 
 {% file src="../.gitbook/assets/drupal-7-module-development-chapter-11.pdf" caption="Mindmap" %}
 
+## Chapter 12: Installation Profiles
+
+{% file src="../.gitbook/assets/drupal-7-module-development-chapter-12.pdf" caption="Mindmap" %}
+
 
 
