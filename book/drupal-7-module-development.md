@@ -40,9 +40,13 @@ description: 'http://github.com/LearningDrupal7Development'
 
 {% file src="../.gitbook/assets/drupal-7-module-development-chapter-9.pdf" caption="Mindmap" %}
 
-## Chapter 10: 
+## Chapter 10: Javascript in Drupal
 
 {% file src="../.gitbook/assets/drupal-7-module-development-chapter-10.pdf" caption="Mindmap" %}
+
+## Chapter 11: Working with Files and Images
+
+{% file src="../.gitbook/assets/drupal-7-module-development-chapter-11.pdf" caption="Mindmap" %}
 
 
 
