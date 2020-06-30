@@ -24,3 +24,7 @@
 * [Search API](concepts/search-api.md)
 * [Themes](concepts/hooks.md)
 
+---
+
+* [Structure](structure.md)
+
