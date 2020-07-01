@@ -27,4 +27,5 @@
 ---
 
 * [Structure](structure.md)
+* [Render Arrays](render-arrays.md)
 
