@@ -130,11 +130,142 @@
 
 ## Menu callbacks
 
+`custom_module.module`
+
+{% code title="custom\_module\_menu\(\)" %}
 ```php
  $items['aup-create-document-with-template/%'] = array(
     'title' => t('AUP Create document with template'),
     'page callback' => 'custom_module_aup_create_doc_with_template',
     'page arguments' => array(1),
+    'access callback' => 'validate_document_permission',
+    'access arguments' => array('AUP Create'),
+    'type' => MENU_CALLBACK,
+  );
+```
+{% endcode %}
+
+> ### constant MENU\_CALLBACK
+>
+> Menu type -- A hidden, internal callback, typically used for API calls.
+>
+> Callbacks simply register a path so that the correct function is fired when the URL is accessed. They do not appear in menus or breadcrumbs.
+
+
+
+What comes after this "hidden callback"? Set session specific variables and redirect.
+
+{% code title="custom\_module\_aup\_create\_doc\_with\_template\($nid\)" %}
+```php
+$template = node_load($nid);
+  if(isset($template->nid)) {
+    //drupal_set_message('<pre>'. print_r($template, true).'</pre>');
+    $_SESSION['aup_document_title'] = $template->title;
+    $_SESSION['aup_document_template_id'] = $template->nid;
+    $_SESSION['aup_document_content'] = extract_value($template->body, 'value');
+    drupal_goto('/create-aup');
+  }
+```
+{% endcode %}
+
+### Define the permission
+
+`isd_helper.module`
+
+{% code title="validate\_document\_permission\($permission = FALSE, $gid = NULL\)" %}
+```php
+/**
+ * Check permissions for Document document type
+ */
+function validate_document_permission($permission = FALSE, $gid = NULL) {
+	error_log("--" . __FUNCTION__ . " : " . basename(__FILE__) . ":" . __LINE__);
+	//$caller = get_caller();
+	//error_log("Caller:$caller");
+	return TRUE;
+
+	if ($permission == FALSE) {
+		return FALSE;
+	}
+	global $user;
+	$is_admin = user_has_role(3, $user);
+	/**
+	 * Allow permission if it is Admin user (iSAFE Admin)
+	 */
+	/*if($is_admin) {
+      return true;
+    }*/
+	$account = user_load($user->uid);
+	$groups = og_get_groups_by_user($account);
+
+	// temp group id
+	$gid = @array_values($groups['node'])[0];
+	//drupal_set_message($gid);
+	//$gid = 1;
+	$roles = og_get_user_roles($group_type = 'node', $gid, $account->uid);
+	$logged_user_roles = og_get_user_roles($group_type = 'node', $gid, $account->uid);
+	$role_permissions = og_role_permissions($roles);
+	//$is_member = og_is_member(2, 'user', $account);
+	//drupal_set_message('<pre> Is admin user: '. print_r($is_admin, true).'</pre>');
+	//drupal_set_message('<pre>'. print_r($role_permissions, true).'</pre>');
+	//drupal_set_message('<pre>'. print_r($logged_user_roles, true).'</pre>');
+	//drupal_set_message('<pre>'. print_r($is_member, true).'</pre>');
+	//drupal_set_message('<pre>'. print_r($groups, true).'</pre>');
+	//drupal_set_message('<pre>'. print_r($account, true).'</pre>');
+	//drupal_set_message('<pre> gid'. print_r($gid, true).'</pre>');
+	$ret = FALSE;
+	switch ($permission) {
+		case 'AUP Create':
+			$if_user_can = og_user_access($group_type = 'node', $gid, $permission, $account) == 1 ? 1 : 0;
+			//drupal_set_message('<pre>'. print_r($if_user_can, true).'</pre>');
+
+			if (!$if_user_can) {
+				$ret = FALSE;
+			}
+			else {
+				$ret = TRUE;
+			}
+			// form_set_error('Permission', t('You are not authorized to create AUP.'));
+
+
+			break;
+		case 'AUP Reporting':
+			$if_user_can = og_user_access($group_type = 'node', $gid, $permission, $account) == 1 ? 1 : 0;
+			//drupal_set_message('<pre>'. print_r($if_user_can, true).'</pre>');
+
+			if (!$if_user_can) {
+				$ret = FALSE;
+			}
+			else {
+				$ret = TRUE;
+			}
+			break;
+		case 'SD Import': // import student directory
+			$if_user_can = og_user_access($group_type = 'node', $gid, $permission, $account) == 1 ? 1 : 0;
+			//drupal_set_message('<pre>'. print_r($if_user_can, true).'</pre>');
+
+			if (!$if_user_can) {
+				$ret = FALSE;
+			}
+			else {
+				$ret = TRUE;
+			}
+			break;
+
+		default:
+			$ret = FALSE;
+			break;
+	}
+	return $ret;
+
+}
+```
+{% endcode %}
+
+### What happened after redirection
+
+```php
+  $items['create-aup'] = array(
+    'page callback' => 'custom_module_create_aup',
     'access callback' => 'validate_document_permission',
     'access arguments' => array('AUP Create'),
     'type' => MENU_CALLBACK,
