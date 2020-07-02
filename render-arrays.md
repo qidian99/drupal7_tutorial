@@ -69,11 +69,7 @@ $page = array(
 
 need page theme function/template right now don't do it
 
-```text
-
-```
-
-## How to add css to blocks
+## How to add CSS to blocks
 
 {% embed url="https://www.drupal.org/forum/support/theme-development/2012-09-30/solved-drupal-7-add-cssstylesheet-to-blocks-within" %}
 
