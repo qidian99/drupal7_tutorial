@@ -128,3 +128,16 @@
 
 ```
 
+## Menu callbacks
+
+```php
+ $items['aup-create-document-with-template/%'] = array(
+    'title' => t('AUP Create document with template'),
+    'page callback' => 'custom_module_aup_create_doc_with_template',
+    'page arguments' => array(1),
+    'access callback' => 'validate_document_permission',
+    'access arguments' => array('AUP Create'),
+    'type' => MENU_CALLBACK,
+  );
+```
+
