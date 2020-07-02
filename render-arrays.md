@@ -87,5 +87,38 @@ need page theme function/template right now don't do it
 
 {% embed url="https://drupal.stackexchange.com/questions/16831/how-do-i-wrap-two-render-array-elements-in-a-div" %}
 
+## SVG
+
+### animation
+
+```javascript
+const percentage = $(circle).attr('data-percentage');
+const radius = circle.r.baseVal.value;
+const circumference = radius * 2 * Math.PI;
+
+function setProgress(percent) {
+  const offset = circumference - percent / 100 * circumference;
+  circle.style.strokeDashoffset = offset;
+}
+
+setProgress(percentage);
+```
+
+### linear gradient to stroke
+
+{% embed url="https://vanseodesign.com/web-design/svg-linear-gradients/" %}
+
+## HTML related
+
+### span vs. div
+
+> The difference between [`span`](https://htmldog.com/references/html/tags/span/) and [`div`](https://htmldog.com/references/html/tags/div/) is that a [`span`](https://htmldog.com/references/html/tags/span/) element is **in-line** and usually used for a small chunk of HTML inside a line \(such as inside a paragraph\) whereas a [`div`](https://htmldog.com/references/html/tags/div/) \(division\) element is **block-line** \(which is basically equivalent to having a line-break before and after it\) and used to group larger chunks of code.
+
+
+
+chart
+
+[http://www.coding-dude.com/wp/html5/bar-chart-html/](http://www.coding-dude.com/wp/html5/bar-chart-html/)
+
 
 
