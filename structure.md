@@ -248,5 +248,49 @@ body.page-edit-aup #block-document-blocks-aup-sidebar-feature-buttons .document_
 }
 ```
 
+## Crucial different for using theme in render array and in theme function
 
+```php
+$content = array(
+  '#theme' => 'statistics_component',
+  '#bars' => $bars,
+  '#last' => $last,
+  '#overall' => $overall,
+  '#attached' => array(
+    'css' => array(
+      drupal_get_path('module', 'aup_mock') . '/css/aup-statistics.css',
+    ),
+  ),
+);
+```
+
+All the variables are the final ones!
+
+
+
+1. [template\_preprocess Drupal 7](http://api.drupal.org/api/function/template_preprocess/7) This is always added by core. The [variables generated here](https://www.drupal.org/node/226776) are used for every templated hook.
+2. template\_preprocess\__hook_ This is supplied by a module or core file that implements a theming hook. The initial generation of all the variables specific to this hook is usually done here.
+3. _moduleName_\_preprocess Do not confuse this with the preprocessor before it. This allows modules that did not originally implement the hook to influence the variables. Applies to all hooks.
+4. _moduleName_\_preprocess\__hook_ Same idea as the previous preprocessor but for specific hooks.
+5. _engineName_\_engine\_preprocess _- The preprocessor for theming engines. Applies to all hooks._
+6. _engineName_\_engine\_preprocess\__hook_ Another preprocessor for theming engines but specific to a single hook.
+7. _engineName_\_preprocess NOT RECOMMENDED. This is the first preprocessor that can be used inside the theme. It can be named after the theme engine the theme is running under. Applies to all hooks.
+8. _engineName_\_preprocess\__hook_ NOT RECOMMENDED. Another preprocessor named after the engine but specific to a single hook.
+9. _themeName_\_preprocess This one is named after the theme itself. Applies to all hooks.
+10. _themeName_\_preprocess\__hook_ Same as the previous preprocessor but for a specific hook.
+
+
+
+Preferred way:
+
+```php
+'description-component' => array(
+  '#markup' => theme('description_component'),
+  '#attached' => array(
+    'css' => array(
+      drupal_get_path('module', 'aup_mock') . '/css/aup-description.css',
+    ),
+  ),
+),
+```
 

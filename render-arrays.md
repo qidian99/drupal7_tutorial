@@ -158,5 +158,27 @@ setProgress(percentage);
 
 {% embed url="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS\_Flexible\_Box\_Layout/Mastering\_Wrapping\_of\_Flex\_Items" %}
 
+> ### Creating gutters between items <a id="Creating_gutters_between_items"></a>
+>
+> When wrapping flex items, the need to space them out is likely to arise. At the current time we do not have any implementations of the gap properties from the [Box Alignment module](https://www.w3.org/TR/css-align-3/) for Flexbox. In the future we will be able to simply use `row-gap` and `column-gap` for flexbox as we do for CSS Grid. At the current time you will need to use margins to achieve this
+
+
+
+```css
+.wrapper {
+    border: 2px dotted rgb(96, 139, 168);
+    width: 500px;
+ }
+.box {
+    display: flex;
+    flex-wrap: wrap;
+    margin:-10px;
+}
+.box>* {
+    flex: 1 1 160px;
+    margin: 10px;
+}
+```
+
 
 

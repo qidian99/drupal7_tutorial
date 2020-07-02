@@ -28,4 +28,5 @@
 
 * [Structure](structure.md)
 * [UI Implementation](render-arrays.md)
+* [Function trace](function-trace.md)
 
