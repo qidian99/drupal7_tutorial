@@ -27,5 +27,5 @@
 ---
 
 * [Structure](structure.md)
-* [Render Arrays](render-arrays.md)
+* [UI Implementation](render-arrays.md)
 

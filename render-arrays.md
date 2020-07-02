@@ -1,4 +1,8 @@
-# Render Arrays
+---
+description: Mostly dealing with "Render Arrays"
+---
+
+# UI Implementation
 
 {% embed url="https://www.drupal.org/docs/7/api/render-arrays/render-arrays-overview" %}
 
@@ -87,9 +91,13 @@ need page theme function/template right now don't do it
 
 {% embed url="https://drupal.stackexchange.com/questions/16831/how-do-i-wrap-two-render-array-elements-in-a-div" %}
 
-## SVG
+{% embed url="https://medium.com/@robleto/how-to-set-internal-border-lines-on-a-css-grid-layout-f2f1eeaafb61" %}
+
+## css dynamic height with maximum number of columns
 
 ### animation
+
+{% embed url="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS\_Columns/Using\_multi-column\_layouts" %}
 
 ```javascript
 const percentage = $(circle).attr('data-percentage');
@@ -104,21 +112,49 @@ function setProgress(percent) {
 setProgress(percentage);
 ```
 
+## Template proprocessing
+
 ### linear gradient to stroke
+
+{% embed url="https://www.drupal.org/docs/7/theming/overriding-themable-output/setting-up-variables-for-use-in-a-template-preprocess-and" %}
 
 {% embed url="https://vanseodesign.com/web-design/svg-linear-gradients/" %}
 
+## Build the CSS 
+
 ## HTML related
+
+{% embed url="https://css-tricks.com/building-progress-ring-quickly/" %}
 
 ### span vs. div
 
+{% embed url="https://api.drupal.org/api/drupal/modules%21block%21block.api.php/function/hook\_block\_view/7.x" %}
+
 > The difference between [`span`](https://htmldog.com/references/html/tags/span/) and [`div`](https://htmldog.com/references/html/tags/div/) is that a [`span`](https://htmldog.com/references/html/tags/span/) element is **in-line** and usually used for a small chunk of HTML inside a line \(such as inside a paragraph\) whereas a [`div`](https://htmldog.com/references/html/tags/div/) \(division\) element is **block-line** \(which is basically equivalent to having a line-break before and after it\) and used to group larger chunks of code.
 
+## Manage JS
 
 
-chart
 
-[http://www.coding-dude.com/wp/html5/bar-chart-html/](http://www.coding-dude.com/wp/html5/bar-chart-html/)
+{% embed url="https://www.drupal.org/docs/7/api/javascript-api/managing-javascript-in-drupal-7" %}
+
+## chart
+
+{% embed url="http://www.coding-dude.com/wp/html5/bar-chart-html/" %}
+
+## SVG
+
+### Build the circle percentage
+
+[https://css-tricks.com/building-progress-ring-quickly/](https://css-tricks.com/building-progress-ring-quickly/)
+
+
+
+### Change svg background color
+
+{% embed url="https://stackoverflow.com/questions/22252472/how-to-change-the-color-of-an-svg-element\#:~:text=You%20can\'t%20change%20the,or%20using%20inline." %}
+
+
 
 
 
