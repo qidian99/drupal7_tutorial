@@ -93,9 +93,9 @@ need page theme function/template right now don't do it
 
 {% embed url="https://medium.com/@robleto/how-to-set-internal-border-lines-on-a-css-grid-layout-f2f1eeaafb61" %}
 
-## css dynamic height with maximum number of columns
+## CSS dynamic height with maximum number of columns
 
-### animation
+### Animation
 
 {% embed url="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS\_Columns/Using\_multi-column\_layouts" %}
 
@@ -112,9 +112,9 @@ function setProgress(percent) {
 setProgress(percentage);
 ```
 
-## Template proprocessing
+## Template preprocessing
 
-### linear gradient to stroke
+### Linear gradient to stroke
 
 {% embed url="https://www.drupal.org/docs/7/theming/overriding-themable-output/setting-up-variables-for-use-in-a-template-preprocess-and" %}
 
@@ -138,7 +138,7 @@ setProgress(percentage);
 
 {% embed url="https://www.drupal.org/docs/7/api/javascript-api/managing-javascript-in-drupal-7" %}
 
-## chart
+## Chart
 
 {% embed url="http://www.coding-dude.com/wp/html5/bar-chart-html/" %}
 
@@ -150,7 +150,7 @@ setProgress(percentage);
 
 
 
-### Change svg background color
+### Change SVG background color
 
 {% embed url="https://stackoverflow.com/questions/22252472/how-to-change-the-color-of-an-svg-element\#:~:text=You%20can\'t%20change%20the,or%20using%20inline." %}
 
