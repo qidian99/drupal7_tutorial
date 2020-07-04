@@ -29,4 +29,5 @@
 * [Structure](structure.md)
 * [UI Implementation](render-arrays.md)
 * [Function trace](function-trace.md)
+* [Acquia Dev Desktop Tips](acquia-dev-desktop-tips.md)
 
