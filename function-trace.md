@@ -687,3 +687,132 @@ if (isset($node->title) && !empty($node->title)){
 ```
 {% endcode %}
 
+## Show overlay
+
+
+
+`all/themes/bootstrap_child/js/script.js:275:`
+
+18:
+
+```javascript
+	/* open Logo overlay */
+		$('body').on('click', '.aup_head_logo_slogan_button,.doc_logo_edit.edit_button', function () {
+			$('.field-name-field-document-logo.form-group').addClass('show_overlay');
+		});
+```
+
+
+
+Overlay wrapper
+
+```markup
+<div class="field-type-image field-name-field-document-logo field-widget-image-image form-wrapper form-group show_overlay" id="edit-field-document-logo"><div class="overlay_outer_wrapper">
+                                                        <div class="overlay_wrapper">
+                                                          <h3 class="popup_title">Add Image</h3>
+                                                          <div class="error_messages messages error">Please select an image.</div>
+                                                          <label>Source <span class="small">(full image URL including http://)</span></label>
+                                                          <input type="text" class="form-control form-text docuemnt_source_image" name="docuemnt_source_image" value="">
+
+                                                      <div id="edit-field-document-logo-und-0-ajax-wrapper"><div class="form-item form-item-field-document-logo-und-0 form-type-managed-file form-group"> <label class="control-label" for="edit-field-document-logo-und-0-upload">Logo</label>
+<div class="image-widget form-managed-file clearfix"><div class="image-widget-data"><div class="input-group"><input class="form-control form-file" type="file" id="edit-field-document-logo-und-0-upload" name="files[field_document_logo_und_0]" size="22"><span class="input-group-btn"><button type="submit" id="edit-field-document-logo-und-0-upload-button" name="field_document_logo_und_0_upload_button" value="Upload" class="btn btn-primary form-submit icon-before ajax-processed"><span class="icon glyphicon glyphicon-upload" aria-hidden="true"></span>
+ Upload</button>
+</span></div><input type="hidden" name="field_document_logo[und][0][fid]" value="0">
+<input type="hidden" name="field_document_logo[und][0][display]" value="1">
+</div></div><div class="help-block"><a href="#" data-toggle="popover" data-target="#upload-instructions--2" data-html="1" data-placement="bottom" data-title="File requirements" data-original-title="" title=""><span class="icon glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+ More information</a><div id="upload-instructions--2" class="element-invisible help-block"><ul><li>Files must be less than <strong>64 MB</strong>.</li>
+<li>Allowed file types: <strong>png gif jpg jpeg</strong>.</li>
+</ul></div></div></div></div><div class="overlay_actions"><a class="save_button">Save</a><a class="cancel_button">Cancel</a></div></div></div></div>
+```
+
+Save function of the logo
+
+```javascript
+$('body').on('click', '.field-name-field-document-logo.form-group .overlay_actions .save_button', function () {
+			$('.error_messages').html('');
+			var if_source = $('.docuemnt_source_image').val();
+			var error = false;
+			var img = '';
+			if (if_source != '') {
+				console.log('if_source');
+				if (!validURL(if_source)) {
+					error = true;
+				}
+				else {
+					img = if_source;
+				}
+			}
+			else {
+				if ($('.field-name-field-document-logo .image-preview ') != undefined) {
+					console.log('if_img');
+					var if_img = $('.field-name-field-document-logo .image-preview img').attr('src');
+					if (if_img != '') {
+						img = if_img;
+					}
+				}
+			}
+			console.log(error);
+			console.log(img);
+			// check if url is valid
+			if (error == true) {
+				$('.field-name-field-document-logo.form-group .error_messages').html('Please provide a valid url.');
+			}
+			else if (img == undefined) {
+				$('.field-name-field-document-logo.form-group .error_messages').html('Please select an image.');
+			}
+			else {
+				$('.header_edit_section .doc_logo .temp_text').addClass('hide_me');
+				$('.header_edit_section .doc_logo img').attr('src', img).removeClass('hide_me');
+				//$('.header_initial_title_section').addClass('hide_me');
+				$('.header_edit_section').removeClass('hide_me');
+				$('.field-name-field-document-logo.form-group').removeClass('show_overlay');
+				$('.doc_slogan_edit.edit_button').trigger('click');
+			}
+
+		});
+```
+
+
+
+
+
+They add a hide\_me class to the logo and text:
+
+![](.gitbook/assets/image%20%2823%29.png)
+
+
+
+
+
+custom\_module\_form\_alter: different fields line 1478
+
+
+
+overlay form update
+
+```php
+
+function custom_module_create_aup_form_submit ($form, &$form_state) {
+  error_log("--" . __FUNCTION__ . " : " . basename(__FILE__) . ":" . __LINE__);
+  $values = $form_state['values'];
+  $content = extract_value($values['body'], 'value');
+  isd_update_document_template($content);
+  //drupal_set_message('<pre>'.print_r($values, true).'</pre>');
+  //$form_state['redirect'] = '/aup-preview/' . $form_state['nid'];
+
+}
+
+```
+
+\[03-Jul-2020 06:30:35 UTC\] --isd\_update\_document\_template : isd\_helper.module:1303 \[03-Jul-2020 06:30:35 UTC\] --custom\_module\_entity\_presave : custom\_module.module:1402
+
+
+
+
+
+## Entity Definition
+
+![](.gitbook/assets/image%20%2824%29.png)
+
+
+
