@@ -812,7 +812,7 @@ function custom_module_create_aup_form_submit ($form, &$form_state) {
 
 ## Entity Definition
 
-![](.gitbook/assets/image%20%2824%29.png)
+![](.gitbook/assets/image%20%2826%29.png)
 
 
 
