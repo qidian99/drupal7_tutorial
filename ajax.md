@@ -8,3 +8,21 @@
 
 
 
+{% embed url="https://www.drupal.org/docs/7/api/javascript-api/ajax-forms-in-drupal-7" %}
+
+## Onclick conflict
+
+[http://www.maged.me/blog/drupal-7-execute-javascript-code-after-ajax-call](http://www.maged.me/blog/drupal-7-execute-javascript-code-after-ajax-call)
+
+
+
+
+
+
+
+{% embed url="https://www.drupal.org/forum/support/module-development-and-code-questions/2013-09-04/ajax-form-submission" %}
+
+
+
+
+
