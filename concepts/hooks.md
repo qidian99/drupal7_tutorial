@@ -15,3 +15,15 @@ This results in the following order of execution for a particular theme hook:
 11. THEME\_process\(\) 
 12. THEME\_process\_HOOK\(\)
 
+
+
+
+
+
+
+## Two ways to define a theme
+
+{% embed url="https://www.drupal.org/forum/support/module-development-and-code-questions/2014-09-23/render-element-element" %}
+
+
+
