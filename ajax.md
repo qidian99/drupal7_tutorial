@@ -179,6 +179,44 @@ In JavaScript, they can be used as follows:
 
 {% embed url="https://drupal.stackexchange.com/questions/193202/how-do-i-pass-variables-to-javascript" %}
 
+```javascript
+function ($) {
+    'use strict';
+    Drupal.behaviors.ajaxConfirmLink = {
+      attach: function (context, settings) {
+        $('.isd-dc4-menus__atag', context).once('isd-dc4-menus__atag').on('click', function (event) {
+          var $this = $(this);
+          // Allow to provide confirmation message in
+          // data-use-ajax-confirm-message element attribute.
+
+          const index = $('.isd-dc4-menus__atag').index($this);
+          console.log(index);
+
+          const id = 'isd-dc4-menu-' + index;
+
+          if (!Drupal.ajax[id]) {
+            Drupal.ajax[id] = new Drupal.ajax(id, this, {
+              // 'nojs' to 'ajax' replacement in path performed by Drupal.ajax().
+              url: $this.attr('data-href'),
+              event: 'load_subpage',
+              progress: false,
+              effect: 'fade',
+            });
+          }
+
+          $this.trigger('load_subpage');
+        });
+      }
+    };
+  }(jQuery)
+```
+
+
+
+## AJAX on the fly
+
+{% embed url="https://www.drupal.org/docs/7/api/javascript-api/creating-custom-drupalajax-object-on-the-fly-and-attach-it-to-any-dom" %}
+
 
 
 
