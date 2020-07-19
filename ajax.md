@@ -179,6 +179,14 @@ In JavaScript, they can be used as follows:
 
 {% embed url="https://drupal.stackexchange.com/questions/193202/how-do-i-pass-variables-to-javascript" %}
 
+
+
+## AJAX on the fly
+
+{% embed url="https://www.drupal.org/docs/7/api/javascript-api/creating-custom-drupalajax-object-on-the-fly-and-attach-it-to-any-dom" %}
+
+
+
 ```javascript
 function ($) {
     'use strict';
@@ -210,14 +218,6 @@ function ($) {
     };
   }(jQuery)
 ```
-
-
-
-## AJAX on the fly
-
-{% embed url="https://www.drupal.org/docs/7/api/javascript-api/creating-custom-drupalajax-object-on-the-fly-and-attach-it-to-any-dom" %}
-
-
 
 
 
