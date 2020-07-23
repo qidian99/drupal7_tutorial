@@ -34,4 +34,5 @@
 * [Form](form.md)
 * [CKEditor](ckeditor.md)
 * [Schema API](schema-api.md)
+* [Views API](views-api.md)
 
