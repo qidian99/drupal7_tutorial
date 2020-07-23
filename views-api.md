@@ -189,3 +189,32 @@
 {% endtab %}
 {% endtabs %}
 
+### get\_render\_tokens example result
+
+```text
+(
+    [%page] => 1
+    [%q] => dev/dc4/dashboard
+    [[startDate]] => 09-20-2010
+    [[endDate]] => 05-26-2011
+    [[firstName]] => DAVID
+    [[lastName]] => BRADLEY
+    [[email]] => david.bradley@carlsbad.k12.nm.us
+    [[students]] => 3
+    [[userID]] => 319,180
+    [[invoiceID]] => 9,026
+    [[start_end_date]] => 09-20-2010<br />
+05-26-2011
+    [[schoolName]] => ALTA VISTA MIDDLE
+    [[educator]] => DAVID BRADLEY<br />
+david.bradley@carlsbad.k12.nm.us
+    [[student_grade]] => 3
+)
+```
+
+
+
+`$this->view->style_plugin`
+
+![](.gitbook/assets/image%20%2828%29.png)
+
