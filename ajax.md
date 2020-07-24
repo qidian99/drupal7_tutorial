@@ -143,7 +143,7 @@ drupal_add_js(array('isd_dc4' => array('menus' => ISD_DC4_DEFAULT_MENU)), array(
 
 The way to send PHP information to Javascript is perfectly described \[by @4k4's answer\]\[2\] to a similar question.
 
-```text
+```php
 return [
   '#theme' => 'item_list',
   '#list_type' => 'ul',
@@ -163,7 +163,7 @@ return [
 
 In JavaScript, they can be used as follows:
 
-```text
+```php
 (function ($, Drupal, drupalSettings) {
   Drupal.behaviors.my_library = {
     attach: function (context, settings) {
@@ -220,4 +220,46 @@ function ($) {
 ```
 
 
+
+## Create AJAX links
+
+```php
+$link = array(
+  '#type' => 'link',
+  '#title' => t('something'),
+  '#href' => 'some/path',
+  '#ajax' => array(
+    'callback' => 'some_callback_function',
+    'wrapper' => 'ajax-response-goes-here',
+    'method' => 'replace',
+    'effect' => 'fade',
+  ),
+```
+
+{% embed url="https://api.drupal.org/api/examples/ajax\_example%21ajax\_example\_misc.inc/function/ajax\_example\_render\_link/7.x-1.x" %}
+
+```php
+function ajax_example_render_link() {
+
+  // drupal_add_library is invoked automatically when a form element has the
+  // '#ajax' property, but since we are not rendering a form here, we have to
+  // do it ourselves.
+  drupal_add_library('system', 'drupal.ajax');
+  $explanation = t("\nThe link below has the <i>use-ajax</i> class applied to it, so if\njavascript is enabled, ajax.js will try to submit it via an AJAX call instead\nof a normal page load. The URL also contains the '/nojs/' magic string, which\nis stripped if javascript is enabled, allowing the server code to tell by the\nURL whether JS was enabled or not, letting it do different things based on that.");
+  $output = "<div>" . $explanation . "</div>";
+
+  // The use-ajax class is special, so that the link will call without causing
+  // a page reload. Note the /nojs portion of the path - if javascript is
+  // enabled, this part will be stripped from the path before it is called.
+  $link = l(t('Click here'), 'ajax_link_callback/nojs/', array(
+    'attributes' => array(
+      'class' => array(
+        'use-ajax',
+      ),
+    ),
+  ));
+  $output .= "<div id='myDiv'></div><div>{$link}</div>";
+  return $output;
+}
+```
 

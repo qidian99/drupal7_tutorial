@@ -218,3 +218,107 @@ david.bradley@carlsbad.k12.nm.us
 
 ![](.gitbook/assets/image%20%2828%29.png)
 
+## Execution order
+
+**Basic execution order:**
+
+1. _**hook\_views\_pre\_view**_
+2. _**hook\_views\_pre\_build**_
+3. _**hook\_views\_post\_build**_
+4. _**hook\_views\_pre\_execute**_
+5. _**hook\_views\_post\_execute**_
+6. _**hook\_views\_pre\_render**_
+7. _**hook\_views\_post\_render**_
+
+**hook\_views\_pre\_view**  
+Allows altering a view at the very beginning of views processing, before other tasks..  
+Adding output to the view can be accomplished by placing text on $view-&gt;attachment\_before and $view-&gt;attachment\_after.
+
+_**hook\_views\_pre\_view\(&$view, &$display\_id, &$args\)**_
+
+  
+**Parameters**
+
+**$view:** The view object which is about to be processed.
+
+**$display\_id:** The machine name of the active display.
+
+**$args:** An array of arguments passed to the view.
+
+**hook\_views\_pre\_build**  
+This hook is called right before the build process, but after displays are attached and the display performs its pre\_execute phase.  
+We can add output to the view by placing text on $view-&gt;attachment\_before and $view-&gt;attachment\_after.
+
+_**hook\_views\_pre\_build\(&$view\)**_
+
+**Parameters**
+
+**$view:** The view object about to be processed.
+
+**hook\_views\_post\_build**  
+This hook is called right after the build process. The query has been fully built now, but it has not yet been run through db\_rewrite\_sql.
+
+Adding output to the view can be accomplished by placing text on $view-&gt;attachment\_before and $view-&gt;attachment\_after.  
+ 
+
+_**hook\_views\_post\_build\(&$view\)**_
+
+**Parameters**
+
+**$view:** The view object about to be processed.
+
+**hook\_views\_pre\_execute**  
+This hook is called right before the execution process. The query has now been fully built, but it has not yet been run through db\_rewrite\_sql.
+
+Adding output to the view can be accomplished by placing text on $view-&gt;attachment\_before and $view-&gt;attachment\_after.
+
+_**hook\_views\_pre\_execute\(&$view\)**_  
+      
+**Parameters**
+
+**$view:** The view object about to be processed.
+
+**Hook\_views\_post\_execute**  
+This hook is called right after the executing process. The query is now executed, but the pre\_render\(\) phase has not yet been executed for handlers.
+
+Adding output to the view can be accomplished by placing text on $view-&gt;attachment\_before and $view-&gt;attachment\_after. Altering the content can be achieved by editing the items of $view-&gt;result.
+
+_**hook\_views\_post\_execute\(&$view\)**_
+
+**Parameters**  
+ 
+
+**$view:** The view object about to be processed.
+
+**hook\_views\_pre\_render**  
+The Drupal views pre-render is called right before the rendering process. The query has been executed, and the pre\_render\(\) phase has already happened for handlers, so all data should be available.
+
+Adding output to the view can be accomplished by placing text on $view-&gt;attachment\_before and $view-&gt;attachment\_after. Altering the content can be achieved by editing the items of $view-&gt;result.
+
+This hook can be utilized by themes.
+
+_**hook\_views\_pre\_render\(&$view\)**_
+
+**Parameters**
+
+**$view:** The view object about to be processed.  
+ 
+
+**hook\_views\_post\_render**  
+Post process any rendered data.
+
+This can be valuable to be able to cache a view and still have some level of dynamic output. In an ideal world, the actual output will include HTML comment based tokens, and then the post process can replace those tokens.
+
+_**hook\_views\_post\_render\(&$view, &$output, &$cache\)**_
+
+**Parameters**
+
+**$view:** The view object about to be processed.
+
+**$output:** A flat string with the rendered output of the view.
+
+**$cache:** The cache settings.
+
+  
+All the above phases have a generic flow that ‘view’ follows. Altering a view query to get your choice of data or the output which is not feasible to get it from existing views configuration could be very easy by understanding these phases.
+
