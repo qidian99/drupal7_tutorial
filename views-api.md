@@ -322,3 +322,13 @@ _**hook\_views\_post\_render\(&$view, &$output, &$cache\)**_
   
 All the above phases have a generic flow that ‘view’ follows. Altering a view query to get your choice of data or the output which is not feasible to get it from existing views configuration could be very easy by understanding these phases.
 
+
+
+
+
+## VBO
+
+{% embed url="https://www.drupal.org/node/2052067" %}
+
+
+

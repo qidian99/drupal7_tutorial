@@ -263,3 +263,7 @@ function ajax_example_render_link() {
 }
 ```
 
+## Ajax invoke jQuery/JS commands directly
+
+
+
