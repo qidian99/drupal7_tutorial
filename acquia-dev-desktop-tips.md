@@ -25,8 +25,6 @@ inet 192.168.0.108 netmask 0xffffff00 broadcast 192.168.0.255
 
 To enable access from all other hosts \(unsafe\)
 
-
-
 ```text
 <VirtualHost *:8083>
   ServerName drupal-7-72.dd
@@ -45,5 +43,7 @@ To enable access from all other hosts \(unsafe\)
 
 ```
 
-### 
+{% embed url="https://rihards.com/2019/acquia-dev-desktop-local-network/" %}
+
+
 
