@@ -130,5 +130,42 @@ Note that `tmpfile()` returns a file handle, but all the functions you have need
 
 {% embed url="https://stackoverflow.com/questions/4545311/download-a-file-by-jquery-ajax" %}
 
+## How to create a multi-step form
 
+In form, switch $form\_state for some value, and assign an id to the form itself
+
+```php
+  $form['#id'] = $form_id;
+```
+
+In form submit handler,
+
+```php
+function YOUR_FORM_submit($form, &$form_state)
+{
+  switch ($form_state['input']['_triggering_element_value']) {
+    case 'Edit': {
+        $form_state['mode'] = 'edit';
+        break;
+      }
+    default: {
+        $form_state['mode'] = 'view';
+      }
+  }
+
+  $form_state['rebuild'] = TRUE;
+}
+
+```
+
+In form callback handler,
+
+```php
+
+function YOUR_FORM_callback($form, &$form_state)
+{
+  return $form;
+}
+
+```
 
