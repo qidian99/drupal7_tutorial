@@ -330,5 +330,71 @@ All the above phases have a generic flow that ‘view’ follows. Altering a vie
 
 {% embed url="https://www.drupal.org/node/2052067" %}
 
+## Table Joins
+
+Two ways to perform inner/left join in Drupal views, both of which require the entity definition: 1. Through hook\_views\_query\_alter
+
+```text
+$join = new views_join();
+    $join->table = 'isd_document_reviewer';
+    $join->left_table = 'isd_document'; // The table to join
+    $join->field = 'document_id';
+    $join->left_field = 'document_id'; // The column we want to join with
+    $join->type = 'INNER'; // if you want another join type play with this value
+    $join->definition = array(
+      'left_field' => 'document_id',
+      'field' => 'document_id',
+      'table' => 'isd_document',
+      'left_table' => 'isd_document_reviewer',
+    );
+    // Do the actual join
+    $query->table_queue['isd_document_reviewer'] = array(
+      'alias' => 'isd_document_reviewer',
+      'table' => 'isd_document_reviewer',
+      'relationship' => 'isd_document',
+      'join' => $join,
+    );
+
+    $query->fields['isd_document_reviewer'] = array(
+      'field' => 'inserted',
+      'table' => 'isd_document_reviewer',
+      'alias' => 'isd_document_reviewer',
+    );
+```
+
+ Drawback, in this case the fields are not manageable in View UI, but if we just want the data we can just execute the view:
+
+```text
+$view = views_get_view('document_review');
+$view->set_display('default');
+$view->execute();
+```
+
+ 2. Define a new relationship in the hook hook\_views\_data\_alter
+
+```text
+$data['isd_document']['id_idr'] = array(
+    'title' => t('ISD Document Reviewer'),
+    'help' => t('The reviewer of a ISD document'),
+    'relationship' => array(
+      'base' => 'isd_document_reviewer',
+      // Database field name in example_table for the join.
+      'base field' => 'document_id',
+      // Real database field name in foo for the join, to override
+      // 'unique_dummy_name'.
+      'field' => 'document_id',
+      // ID of relationship handler plugin to use.
+      'id' => 'standard',
+      'label' => t('Default label for relationship'),
+    ),
+  );
+```
+
+ Preferred way of doing joins.
+
+## Multiple Relationships
+
+{% embed url="https://drupal.stackexchange.com/questions/8645/how-do-i-set-up-a-drupal-view-with-two-relationships/8646\#:~:text=The%20answer%20is%20to%20go,relationship%20so%20that%20they%20chain." %}
+
 
 
