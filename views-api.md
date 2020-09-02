@@ -396,5 +396,153 @@ $data['isd_document']['id_idr'] = array(
 
 {% embed url="https://drupal.stackexchange.com/questions/8645/how-do-i-set-up-a-drupal-view-with-two-relationships/8646\#:~:text=The%20answer%20is%20to%20go,relationship%20so%20that%20they%20chain." %}
 
+## Wrapper around Views
 
+{% embed url="https://drupal.stackexchange.com/questions/71950/views-add-a-wrapper-around-fields-or-rows" %}
+
+I think it's pretty safe to say that most people tackle both of your questions using the Cascading features of CSS.
+
+For example, a typical view's HTML looks somewhat like this:
+
+So, to your 1st question, Views already creates a div that wraps each row, that's the `<div class="views-row ...">` one. You can style it per view by doing something like this:
+
+```text
+.view-NAME .views-row {
+  /* styles for the rows div goes here */
+}
+```
+
+And to your 2nd question, Views also already creates a `<div>` that wraps all the rows, that's the `<div class="view-content">` one. To style it for a particular view you can do something like this:
+
+```text
+.view-NAME .view-content {
+  /* styles for the div wrapping your rows goes here */
+}
+```
+
+Now, somewhat obviously, this is all dependent upon your theme. I am aware that some out there dislike all the markup Drupal by default creates and has overridden a lot of the standard templates to create leaner markup.
+
+If that's the case in your instance, you should still be to instruct Views to add a class to each row if you want. This is accessed via the overall Style Settings \(where you can also look at each Views template that is used for the particular view\).
+
+You could also instruct Views to add a class to each field wrapper. This is accessed from the config widget by each field.
+
+ADDITION based upon commentary:
+
+The Views template that creates the output of the view-content div is `views-view.tpl.php` and the code in question is:
+
+```text
+<?php if ($rows): ?>
+  <div class="view-content">
+    <?php print $rows; ?>
+  </div>
+<?php elseif ($empty): ?>
+  <div class="view-empty">
+    <?php print $empty; ?>
+  </div>
+<?php endif; ?>
+```
+
+so without changing this up, you're right, Views doesn't allow quick and easy preprocessing of the View to insert any other variables into that div's classes.
+
+You could however use Views' preprocessing hooks to create an additional variable so you don't need to create lots of additional templates but rather just one more.
+
+For example, copy `views-view.tpl.php` to your theme \(easiest\) or module \(requires special Views theme incantations :\) and modify it along these lines:
+
+```text
+<?php if ($rows): ?>
+  <div class="view-content <?php print $my_special_content_class; ?>">
+    <?php print $rows; ?>
+  </div>
+<?php elseif ($empty): ?>
+  <div class="view-empty">
+    <?php print $empty; ?>
+  </div>
+<?php endif; ?>
+```
+
+and then create a views preprocess hook along these lines:
+
+```text
+function YOURTHEMEORMODULE_preprocess_views_view(&$vars) {
+
+  $name=$vars['name'];
+  $display_id=$vars['display_id'];
+
+  if ($name=='VIEWYOUWANT' && $display_id=='DISPLAYYOUWANT') {
+    $vars['my_special_content_class']='FOO';
+  } else {
+    $vars['my_special_content_class']=''; // so we don't have to isset() or !empty() it in our template :)
+  }
+
+}
+```
+
+Save everything and clear your theme cache and now you should be on your way.
+
+SECOND ADDITION:
+
+Upon further thought, and a 'doh!' moment, you can do this without a template at all in preprocess like this:
+
+```text
+function YOURTHEME_preprocess_views_view(&$vars) {
+
+  $name=$vars['name'];
+  $display_id=$vars['display_id'];
+
+  if ($name=='VIEWYOUWANT' && $display_id=='DISPLAYYOUWANT') {
+    $vars['rows']='<div class="FOO">' . $vars['rows'] . '</div>';
+  }
+
+}
+```
+
+if you don't mind another wrapped div in there. And, I think you will need to/should do this in your theme instead of a module so you make sure this happens in the right order, eg, you want this to happen after Views is all said and done with things, and the theme hooks always run after the module hooks.
+
+
+
+## Add theme suggestion
+
+{% embed url="https://drupal.stackexchange.com/questions/227709/adding-theme-suggestions-programmatically-for-views-rows-fields" %}
+
+Your Solution is good, but there is a cleaner one. You can use the `hook_theme_suggestions_HOOK_alter`, so you do not have to check if it's a `view` or whatever you want to check.
+
+In your case it would look like this:
+
+```php
+function spve_theme_suggestions_views_view_alter(array &$suggestions, array $variables) {
+    // If you want you can add a template suggestion for all views
+    // based on their ID:
+    $suggestions[] = sprintf('views_view__%s', $variables['view']->id());
+
+    // Or you can check the ID, add suggestions, do whatever you want
+    // ...
+}
+
+function spve_theme_suggestions_views_view_field_alter(array &$suggestions, array $variables) {
+    // Check here the id, add suggestions, do whatever you want
+    // ...
+}
+```
+
+More informations in the [Drupal Theme API](https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Render%21theme.api.php/function/hook_theme_suggestions_HOOK_alter/8.4.x)
+
+## Add table without using entity
+
+1. Implement hook\_views\_api\(\)
+
+![](.gitbook/assets/image%20%2830%29.png)
+
+2. Put the MODULE\_views\_data.inc in the path location
+
+3. We can reference to node\_view\_data.inc
+
+## Aggregation choose last record 
+
+{% embed url="https://paulund.co.uk/get-last-record-in-each-mysql-group" %}
+
+```text
+SELECT t1.* FROM messages t1
+  JOIN (SELECT from_id, MAX(timestamp) timestamp FROM messages GROUP BY from_id) t2
+    ON t1.from_id = t2.from_id AND t1.timestamp = t2.timestamp;
+```
 
