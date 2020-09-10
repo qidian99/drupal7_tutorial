@@ -367,3 +367,98 @@ $new_where[] = array(
 // dpm($query);
 ```
 
+Reason for that: `views_plugin_query_default`:1148
+
+```php
+if (!empty($info['conditions'])) {
+        $sub_group = $info['type'] == 'OR' ? db_or() : db_and();
+        foreach ($info['conditions'] as $key => $clause) {
+          // DBTNG doesn't support to add the same subquery twice to the main
+          // query and the count query, so clone the subquery to have two
+          // instances of the same object.
+          // @see http://drupal.org/node/1112854
+          if (is_object($clause['value']) && $clause['value'] instanceof SelectQuery) {
+            $clause['value'] = clone $clause['value'];
+          }
+          if ($clause['operator'] == 'formula') {
+            $has_condition = TRUE;
+            $sub_group->where($clause['field'], $clause['value']);
+          }
+          else {
+            $has_condition = TRUE;
+            $sub_group->condition($clause['field'], $clause['value'], $clause['operator']);
+          }
+        }
+```
+
+## Or not working
+
+{% embed url="https://www.drupal.org/project/drupal/issues/3040879" %}
+
+## Limit and offset in view's build\_info
+
+```php
+if (!$get_count) {
+      if (!empty($this->limit) || !empty($this->offset)) {
+        // We can't have an offset without a limit, so provide a very large
+        // limit instead.
+        $limit  = intval(!empty($this->limit) ? $this->limit : 999999);
+        $offset = intval(!empty($this->offset) ? $this->offset : 0);
+        $query->range($offset, $limit);
+      }
+    }
+    
+```
+
+## Custom plugin
+
+{% embed url="https://www.drupal.org/project/views/issues/1836396" %}
+
+## Build condition
+
+ The function that built the query in views\_plugin\_query\_default
+
+```php
+/**
+ * Construct the "WHERE" or "HAVING" part of the query.
+ *
+ * As views has to wrap the conditions from arguments with AND, a special
+ * group is wrapped around all conditions. This special group has the ID 0.
+ * There is other code in filters which makes sure that the group IDs are
+ * higher than zero.
+ *
+ * @param string $where
+ *   Either 'where' or 'having'.
+ */
+public function build_condition($where = 'where')
+```
+
+## Same pager for multiple views
+
+```php
+// If the current page number was not specified, extract it from the global
+// page array.
+global $pager_page_array;
+
+if (empty($pager_page_array)) {
+  $pager_page_array = array();
+}
+
+// Fill in missing values in the global page array, in case the global page
+// array hasn't been initialized before.
+$page = isset($_GET['page']) ? explode(',', $_GET['page']) : array();
+
+$pager_id = $this->get_pager_id();
+for ($i = 0; $i <= $pager_id || $i < count($pager_page_array); $i++) {
+  $pager_page_array[$i] = empty($page[$i]) ? 0 : $page[$i];
+}
+
+$this->current_page = intval($pager_page_array[$pager_id]);
+
+if ($this->current_page < 0) {
+  $this->current_page = 0;
+}
+```
+
+
+
