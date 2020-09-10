@@ -433,7 +433,7 @@ if (!$get_count) {
 public function build_condition($where = 'where')
 ```
 
-## Same pager for multiple views
+## Bug: Same pager for multiple views
 
 ```php
 // If the current page number was not specified, extract it from the global
@@ -460,5 +460,35 @@ if ($this->current_page < 0) {
 }
 ```
 
+To disable pager:
 
+{% embed url="https://www.drupal.org/project/views/issues/711114" %}
+
+```php
+$view->build($display_id);
+    $view->query->set_limit(NULL); // reset the work done by the pager
+    $view->query->set_offset(NULL);
+```
+
+
+
+My bad Drupal shall never be such easy peasy....the above solution does not work in any subsequent ajax request. Updated solution:
+
+```php
+      $brand_view->set_display($view_display);
+      $pager = $brand_view->display_handler->get_option('pager');
+      $pager['type'] = 'none';
+      $brand_view->display_handler->set_option('pager', $pager);
+      // $brand_view->build($view_display);
+      // $brand_view->query->set_limit(NULL); // reset the work done by the pager
+      // $brand_view->query->set_offset(NULL);
+      $brand_view->set_items_per_page(0);
+      $brand_view->execute();
+```
+
+ Thanks to this stub class:
+
+```php
+class views_plugin_pager_none extends views_plugin_pager {
+```
 
