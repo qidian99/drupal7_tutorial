@@ -348,3 +348,22 @@ TBD
 
 
 
+## TRUE singleton
+
+```php
+$new_where[] = array(
+  'conditions' => array(
+    array(
+      'field' => TRUE,
+      'value' => array(),
+      'operator' => 'formula',
+    ),
+  ),
+  'args' => array(),
+  'type' => 'AND',
+);
+
+// $query->add_where_expression(0, "TRUE");
+// dpm($query);
+```
+
