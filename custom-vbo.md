@@ -263,8 +263,8 @@ dpm($view->field);
 
 ```php
 
-$filters = &$view->filter;
-foreach($filters as $id => $data) {
+$handlers = &$view->filter;
+foreach($handlers as $id => $data) {
   if (!empty($handlers[$id]) && is_object($handlers[$id])) {
     $multiple_exposed_input = array(0 => NULL);
     if ($handlers[$id]->multiple_exposed_input()) {
