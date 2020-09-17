@@ -27,7 +27,7 @@ $databases = array (
 
 ```
 
-## Install update
+## D8 Install update
 
 {% embed url="https://www.drupal.org/docs/updating-drupal/updating-drupal-core-via-drush" %}
 
@@ -143,4 +143,68 @@ $databases = array (
     ```
 
 13. Done. You have successfully updated your Drupal using Drush :\)
+
+## D7 Install update
+
+{% embed url="https://www.drupal.org/docs/7/update/updating-drupal-using-drush" %}
+
+
+
+#### 1. Backup everything <a id="s-1-backup-everything"></a>
+
+Drush backs up the Drupal 7 core installation for you when updating, but you might want to back-up the sites directory just in case something goes wrong. You also want to take a backup of the database. Use the command below to back up everything:
+
+```text
+drush archive-dump
+```
+
+#### 2. Put your site in maintenance mode <a id="s-2-put-your-site-in-maintenance-mode"></a>
+
+```text
+drush vset --exact maintenance_mode 1 
+drush cache-clear all 
+```
+
+#### 3. Update Drupal with drush <a id="s-3-update-drupal-with-drush"></a>
+
+```text
+drush pm-update drupal
+```
+
+Drush will also update your database if necessary.
+
+#### 4. Check that everything works <a id="s-4-check-that-everything-works"></a>
+
+Go around your site and test everything! If you had modified robots.txt or .htaccess, make sure the modifications are reapplied. \(Sometimes you can just copy the old files back.\) If you used a custom installation profile, you might have to copy that back too. If the configuration file has changed, make sure your file has the latest and correct information - compare `sites/default/settings.php` and `sites/default/default.settings.php`.
+
+#### 5. Put your site online again <a id="s-5-put-your-site-online-again"></a>
+
+```text
+drush vset --exact maintenance_mode 0 
+drush cache-clear all 
+```
+
+### Alternative Drush commands <a id="s-alternative-drush-commands"></a>
+
+Alternatively, you might be interested in those other Drush commands:
+
+* `drush pm-update` is the same as running `drush pm-updatecode` and then `drush updatedb`, so you can optionally run the latter two commands to break up the process.
+* `drush pm-updatecode` has a number of options you can use with `drush pm-update`, including `--security-only`. Learn more [here](http://drushcommands.com/drush-7x/pm/pm-updatecode/). You can run update commands with `-n` to prevent it from automatically answering 'y' to every 'y/n' request for user input.
+
+### Troubleshooting <a id="s-troubleshooting"></a>
+
+* _No code updates available_ for __"drush pm-update drupal"  
+  Run following code which will refresh the available releases_._  
+ 
+
+  ```text
+  drush rf
+  ```
+
+  and rerun
+
+  ```text
+  drush pm-update drupal
+
+  ```
 
